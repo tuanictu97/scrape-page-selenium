@@ -1,4 +1,3 @@
-import pickle
 import random
 
 from random_user import UsernameGenerator
