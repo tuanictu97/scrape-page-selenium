@@ -1,6 +1,6 @@
 import random
 
-from scape import register, User
+from scrape import register, User
 from util import PHONE_ARRAY, NAME_ARRAY
 from slugify import slugify
 
