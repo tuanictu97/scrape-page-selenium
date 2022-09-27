@@ -1,12 +1,15 @@
 import time
-
+import chromedriver_autoinstaller
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from paddleocr import PaddleOCR
 
+
 url_register = 'https://timhieuphapluatmoitruongmang.hanoi.gov.vn/binh-chon-video/dang-ky'
+url_buff_like = 'https://timhieuphapluatmoitruongmang.hanoi.gov.vn/binh-chon-video/video/quy-tac-ung-xu-tren-mang-xa' \
+                '-hoi-danh-cho-hoc-sinh-51.html '
 
 
 class User:
@@ -19,7 +22,8 @@ class User:
 
 
 def register(user: User) -> bool:
-    driver = webdriver.Chrome(executable_path='./chromedriver')
+    chromedriver_autoinstaller.install()
+    driver = webdriver.Chrome()
     try:
         driver.get(url_register)
 
@@ -136,8 +140,7 @@ def register(user: User) -> bool:
         # wait element
         time.sleep(10)
 
-        driver.get('https://timhieuphapluatmoitruongmang.hanoi.gov.vn/binh-chon-video/video/quy-tac-ung-xu-tren-mang'
-                   '-xa-hoi-danh-cho-hoc-sinh-51.html')
+        driver.get(url_buff_like)
 
         # wait element redheart
         redheart = WebDriverWait(driver, 10).until(

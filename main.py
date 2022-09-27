@@ -1,18 +1,17 @@
 import random
 
-from random_user import UsernameGenerator
 from scape import register, User
 from util import PHONE_ARRAY, NAME_ARRAY
+from slugify import slugify
 
 
 def write_user_to_file(user: User):
     f = open("user.txt", "a")
-    f.write("{}|{}|{}|{}".format(user.phone, user.email, user.date, user.password))
+    f.write("{}|{}|{}|{}\n".format(user.phone, user.email, user.date, user.password))
     f.close()
 
 
 def auto_register():
-    user_name_ran = UsernameGenerator()
     for e in PHONE_ARRAY:
         random_name = random.choice(NAME_ARRAY)
         date_number = random.randint(1, 28)
@@ -28,11 +27,10 @@ def auto_register():
         else:
             month_str = '{}'.format(month_number)
         random_num = random.randint(1997, 2004)
-        user_ran = user_name_ran.get_consonant(10)
         user = User(
             name=random_name,
             date='{}/{}/2000'.format(date_str, month_str),
-            email='{}{}-{}@gmail.com'.format(user_ran, random_num, month_number),
+            email='{}_{}_{}@gmail.com'.format(slugify(random_name), random_num, month_number),
             phone=e,
             password='123123'
         )
