@@ -12,7 +12,7 @@ def write_user_to_file(user: User):
 
 
 def auto_register():
-    for e in PHONE_ARRAY:
+    for element in PHONE_ARRAY:
         random_name = random.choice(NAME_ARRAY)
         date_number = random.randint(1, 28)
 
@@ -31,16 +31,16 @@ def auto_register():
             name=random_name,
             date='{}/{}/2000'.format(date_str, month_str),
             email='{}_{}_{}@gmail.com'.format(slugify(random_name), random_num, month_number),
-            phone=e,
+            phone=element,
             password='123123'
         )
         try:
             rs = register(user)
             if rs:
+                print('Auto buff success phone: {} - name: {} - email: {}', user.phone, user.name, user.email)
                 write_user_to_file(user=user)
-        except Exception as e:
-            print(e)
-            register(user)
+        except Exception as ex:
+            print('Auto buff fail phone: {} - name: {} - email: {} - message: {}', user.phone, user.name, user.email, ex)
 
 
 if __name__ == '__main__':
