@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 from paddleocr import PaddleOCR
 
 
@@ -22,8 +23,10 @@ class User:
 
 
 def register(user: User) -> bool:
+    options = Options()
+    options.add_argument('--headless')
     chromedriver_autoinstaller.install()
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(chrome_options=options)
     try:
         driver.get(url_register)
 
